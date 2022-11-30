@@ -129,7 +129,7 @@ export const asyncRoutes = [
     ]
   },
 
-
+  
   {
     path: 'external-link',
     component: Layout,
@@ -137,6 +137,19 @@ export const asyncRoutes = [
       {
         path: 'https://github.com/digital-industry-group/Capstone2022-FE',
         meta: { title: 'External Link', icon: 'link' }
+      }
+    ]
+  },
+
+  {
+    path: '/report',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/report/index'),
+        name: 'Report',
+        meta: { title: 'Report', icon: 'link', noCache: true }
       }
     ]
   },
