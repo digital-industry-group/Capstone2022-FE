@@ -57,13 +57,26 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/google',
     children: [
       {
-        path: 'dashboard',
+        path: 'google',
         component: () => import('@/views/dashboard/index'),
-        name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+        name: 'Google',
+        meta: { title: 'Google', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/mail-chimp',
+    children: [
+      {
+        path: 'Mail Chimp',
+        component: () => import('@/views/Mail/index'),
+        name: 'Mail Chimp',
+        meta: { title: 'Mail Chimp', icon: 'dashboard', affix: true }
       }
     ]
   },
@@ -129,7 +142,6 @@ export const asyncRoutes = [
     ]
   },
 
-  
   {
     path: 'external-link',
     component: Layout,

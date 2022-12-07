@@ -6,11 +6,7 @@
     <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
       <line-chart :chart-data="lineChartData" />
     </el-row>
-    <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
-      <div class="chart-wrapper">
-        <pie-chart />
-      </div>
-    </el-row>
+
     <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
       <div class="chart-wrapper">
         <bar-chart />
@@ -23,7 +19,6 @@
 <script>
 import PanelGroup from './components/PanelGroup'
 import LineChart from './components/LineChart'
-import PieChart from './components/PieChart'
 import BarChart from './components/BarChart'
 
 const lineChartData = {
@@ -50,7 +45,6 @@ export default {
   components: {
     PanelGroup,
     LineChart,
-    PieChart,
     BarChart
   },
   data() {
@@ -71,13 +65,6 @@ export default {
   padding: 32px;
   background-color: rgb(240, 242, 245);
   position: relative;
-
-  .github-corner {
-    position: absolute;
-    top: 0px;
-    border: 0;
-    right: 0;
-  }
 
   .chart-wrapper {
     background: #fff;
