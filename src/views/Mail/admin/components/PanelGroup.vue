@@ -7,48 +7,87 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            Users
+            Emails Sent
           </div>
-          <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="emails_sent" :duration="2600" class="card-panel-num" />
+        </div>
+      </div>
+    </el-col>
+    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
+      <div class="card-panel" @click="handleSetLineChartData('users')">
+        <div class="card-panel-icon-wrapper icon-people">
+          <svg-icon icon-class="peoples" class-name="card-panel-icon" />
+        </div>
+        <div class="card-panel-description">
+          <div class="card-panel-text">
+            Click Total
+          </div>
+          <count-to :start-val="0" :end-val="clicks" :duration="2600" class="card-panel-num" />
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('messages')">
         <div class="card-panel-icon-wrapper icon-people">
-          <svg-icon icon-class="peoples" class-name="card-panel-icon" />
+          <svg-icon icon-class="email" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            New Users
+            Opens
           </div>
-          <count-to :start-val="0" :end-val="81212" :duration="3000" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="opens_total" :duration="3000" class="card-panel-num" />
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('example')">
-        <div class="card-panel-icon-wrapper icon-example">
-          <svg-icon icon-class="example" class-name="card-panel-icon" />
+        <div class="card-panel-icon-wrapper icon-people">
+          <svg-icon icon-class="email" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            Sessions
+            Unique Opens
           </div>
-          <count-to :start-val="0" :end-val="9280" :duration="3200" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="unique_opens" :duration="3200" class="card-panel-num" />
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('example')">
-        <div class="card-panel-icon-wrapper icon-example">
-          <svg-icon icon-class="example" class-name="card-panel-icon" />
+        <div class="card-panel-icon-wrapper icon-people">
+          <svg-icon icon-class="guide" class-name="card-panel-icon" />
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            Number of Sessions per User
+            Open Rate
           </div>
-          <count-to :start-val="0" :end-val="13600" :duration="3600" class="card-panel-num" />
+          <count-to :start-val="0" :end-val="open_rate" :duration="3600" class="card-panel-num" />
+        </div>
+      </div>
+    </el-col>
+    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
+      <div class="card-panel" @click="handleSetLineChartData('example')">
+        <div class="card-panel-icon-wrapper icon-people">
+          <svg-icon icon-class="guide" class-name="card-panel-icon" />
+        </div>
+        <div class="card-panel-description">
+          <div class="card-panel-text">
+            Sub Rate
+          </div>
+          <count-to :start-val="0" :end-val="sub_rate" :duration="3600" class="card-panel-num" />
+        </div>
+      </div>
+    </el-col>
+    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
+      <div class="card-panel" @click="handleSetLineChartData('example')">
+        <div class="card-panel-icon-wrapper icon-people">
+          <svg-icon icon-class="guide" class-name="card-panel-icon" />
+        </div>
+        <div class="card-panel-description">
+          <div class="card-panel-text">
+            Unsub Rate
+          </div>
+          <count-to :start-val="0" :end-val="unsub_rate" :duration="3600" class="card-panel-num" />
         </div>
       </div>
     </el-col>
@@ -59,12 +98,61 @@
 import CountTo from 'vue-count-to'
 
 export default {
+  name: 'Report',
   components: {
     CountTo
+  },
+  data() {
+    return {
+      results: [],
+      isLoading: false,
+      error: null,
+      clicks: 0,
+      emails_sent: 0,
+      opens_total: 0,
+      unique_opens: 0,
+      open_rate: 0,
+      sub_rate: 0,
+      unsub_rate: 0
+    }
+  },
+  created() {
+    this.loadReports()
   },
   methods: {
     handleSetLineChartData(type) {
       this.$emit('handleSetLineChartData', type)
+    },
+
+    loadReports() {
+      this.isLoading = true
+      this.error = null
+      fetch('http://127.0.0.1:5000/reports').then((response) => {
+        if (response.ok) {
+          return response.json()
+        }
+      }).then((data) => {
+        // console.log(data);
+        this.isLoading = false
+        const results = []
+        for (const id in data['reports']) {
+          results.push(data['reports'][id])
+        }
+        this.results = results
+        // console.log(results[0].clicks.clicks_total);
+        this.clicks = results[0].clicks.clicks_total
+        this.emails_sent = results[0].emails_sent
+        this.opens_total = results[0].opens.opens_total
+        this.unique_opens = results[0].opens.unique_opens
+        this.open_rate = results[0].list_stats.open_rate
+        this.sub_rate = results[0].list_stats.sub_rate
+        this.unsub_rate = results[0].list_stats.unsub_rate
+      })
+        .catch((error) => {
+          console.log(error)
+          this.isLoading = false
+          this.error = 'Failed to fetch data. Please try again later'
+        })
     }
   }
 }

@@ -1,76 +1,75 @@
 <template>
-    <div class="dashboard-container">
-        <div class="text-center">
-        
-        <h2>All Report</h2><button class="btn" @click="loadReports">Refresh</button>
-        </div>
-        <hr>
-        <p v-if="isLoading">Loading ...</p>
-        <p v-else-if="!isLoading && error">
-        {{error}}
-      </p>
-        <p v-else-if="!isLoading && (!results || results.length === 0)">No results.</p>
-        <div v-else-if="!isLoading && results && results.length > 0">
-           <ol>
-           <li v-for="result in results" :key="result.id">
-           {{result}}
-           </li>
-           </ol>
+  <div class="dashboard-container">
+    <div class="text-center">
 
-        </div>
+      <h2>All Report</h2><button class="btn" @click="loadReports">Refresh</button>
     </div>
+    <hr>
+    <p v-if="isLoading">Loading ...</p>
+    <p v-else-if="!isLoading && error">
+      {{ error }}
+    </p>
+    <p v-else-if="!isLoading && (!results || results.length === 0)">No results.</p>
+    <div v-else-if="!isLoading && results && results.length > 0">
+      <ol>
+        <li v-for="result in results" :key="result.id">
+          {{ result.list_stats.click_rate }}
+        </li>
+      </ol>
+
+    </div>
+  </div>
 </template>
 
 <script>
 // import { mapGetters } from 'vuex'
 
 export default {
-name: 'Report',
-data() {
+  name: 'Report',
+  data() {
     return {
-        results: [],
-        isLoading: false,
-        error:null
+      results: [],
+      isLoading: false,
+      error: null
     }
-},
-// computed: {
-//     ...mapGetters([
-//         'reports'
-//     ])
-// },
-created() {
+  },
+  // computed: {
+  //     ...mapGetters([
+  //         'reports'
+  //     ])
+  // },
+  created() {
     this.loadReports()
-},
-methods: {
-loadReports() {
-    this.isLoading = true;
-    this.error = null;
-    fetch('http://127.0.0.1:5000/reports').then((response) => {
+  },
+  methods: {
+    loadReports() {
+      this.isLoading = true
+      this.error = null
+      fetch('http://127.0.0.1:5000/reports').then((response) => {
         if (response.ok) {
-            return response.json()
+          return response.json()
         }
-    }).then((data) => {
+      }).then((data) => {
         // console.log(data);
-        this.isLoading = false;
+        this.isLoading = false
         const results = []
-        for (const id in data['reports']){
+        for (const id in data['reports']) {
           results.push(data['reports'][id])
         }
-        this.results = results;
-})
+        this.results = results
+        console.log(results[0].list_stats.click_rate)
+      })
         .catch((error) => {
-            console.log(error);
-            this.isLoading = false;
-            this.error = 'Failed to fetch data. Please try again later';
-        });
-
-}
-}
+          console.log(error)
+          this.isLoading = false
+          this.error = 'Failed to fetch data. Please try again later'
+        })
+    }
+  }
 }
 </script>
 
 <style scoped>
-
 
 .text-center{
     text-align: center;
