@@ -1,7 +1,7 @@
 <template>
   <el-row :gutter="40" class="panel-group">
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('users')">
+      <div class="card-panel" @click="handleSetLineChartData('email_sent')">
         <div class="card-panel-icon-wrapper icon-people">
           <svg-icon icon-class="peoples" class-name="card-panel-icon" />
         </div>
@@ -14,7 +14,7 @@
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('users')">
+      <div class="card-panel" @click="handleSetLineChartData('click_total')">
         <div class="card-panel-icon-wrapper icon-people">
           <svg-icon icon-class="peoples" class-name="card-panel-icon" />
         </div>
@@ -27,7 +27,7 @@
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('messages')">
+      <div class="card-panel" @click="handleSetLineChartData('opens')">
         <div class="card-panel-icon-wrapper icon-people">
           <svg-icon icon-class="email" class-name="card-panel-icon" />
         </div>
@@ -40,7 +40,7 @@
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('example')">
+      <div class="card-panel" @click="handleSetLineChartData('unique_opens')">
         <div class="card-panel-icon-wrapper icon-people">
           <svg-icon icon-class="email" class-name="card-panel-icon" />
         </div>
@@ -53,7 +53,7 @@
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('example')">
+      <div class="card-panel" @click="handleSetLineChartData('open_rate')">
         <div class="card-panel-icon-wrapper icon-people">
           <svg-icon icon-class="guide" class-name="card-panel-icon" />
         </div>
@@ -66,7 +66,7 @@
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('example')">
+      <div class="card-panel" @click="handleSetLineChartData('empty')">
         <div class="card-panel-icon-wrapper icon-people">
           <svg-icon icon-class="guide" class-name="card-panel-icon" />
         </div>
@@ -79,7 +79,7 @@
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('example')">
+      <div class="card-panel" @click="handleSetLineChartData('empty')">
         <div class="card-panel-icon-wrapper icon-people">
           <svg-icon icon-class="guide" class-name="card-panel-icon" />
         </div>
