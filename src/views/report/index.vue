@@ -13,7 +13,7 @@
     <div v-else-if="!isLoading && results && results.length > 0">
       <ol>
         <li v-for="result in results" :key="result.id">
-          {{ result.list_stats.click_rate }}
+          {{ result }}
         </li>
       </ol>
 
