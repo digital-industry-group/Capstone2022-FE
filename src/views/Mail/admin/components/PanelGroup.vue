@@ -139,7 +139,7 @@ export default {
           results.push(data['reports'][id])
         }
         this.results = results
-        // console.log(results[0].clicks.clicks_total);
+        console.log(results)
         this.clicks = results[0].clicks.clicks_total
         this.emails_sent = results[0].emails_sent
         this.opens_total = results[0].opens.opens_total

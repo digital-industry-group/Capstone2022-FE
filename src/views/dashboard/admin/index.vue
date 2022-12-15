@@ -4,16 +4,8 @@
     <panel-group @handleSetLineChartData="handleSetLineChartData" />
 
     <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
-      <line-chart :chart-data="lineChartData" />
-    </el-row>
-    <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
       <div class="chart-wrapper">
         <pie-chart />
-      </div>
-    </el-row>
-    <el-row style="background:#fff;padding:16px 16px 0;margin-bottom:32px;">
-      <div class="chart-wrapper">
-        <bar-chart />
       </div>
     </el-row>
   </div>
@@ -22,9 +14,7 @@
 
 <script>
 import PanelGroup from './components/PanelGroup'
-import LineChart from './components/LineChart'
 import PieChart from './components/PieChart'
-import BarChart from './components/BarChart'
 
 const lineChartData = {
   users: {
@@ -49,15 +39,14 @@ export default {
   name: 'DashboardAdmin',
   components: {
     PanelGroup,
-    LineChart,
-    PieChart,
-    BarChart
+    PieChart
   },
   data() {
     return {
       lineChartData: lineChartData.newVisitis
     }
   },
+
   methods: {
     handleSetLineChartData(type) {
       this.lineChartData = lineChartData[type]

@@ -59,14 +59,14 @@ export default {
             name: 'WEEKLY WRITE ARTICLES',
             type: 'pie',
             roseType: 'radius',
-            radius: [15, 95],
+            radius: [25, 105],
             center: ['50%', '38%'],
             data: [
-              { value: 320, name: 'New Visitor' },
-              { value: 140, name: 'Returning Visitor' }
+
+              { value: 3, name: 'New Visitor' }
             ],
             animationEasing: 'cubicInOut',
-            animationDuration: 2600
+            animationDuration: 2000
           }
         ]
       })
